@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+ *  Copyright (c) 2026 The WebRTC project authors. All Rights Reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree.
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="H.264 simulcast layer switching reproduction">
+  <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1">
+  <meta itemprop="description" content="Client-side WebRTC code samples">
+  <meta itemprop="image" content="../../../images/webrtc-icon-192x192.png">
+  <meta itemprop="name" content="WebRTC code samples">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta id="theme-color" name="theme-color" content="#ffffff">
+
+  <base target="_blank">
+
+  <title>H.264 simulcast layer switching reproduction</title>
+
+  <link rel="icon" sizes="192x192" href="../../../images/webrtc-icon-192x192.png">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+        rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="../../../css/main.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+<div id="container">
+  <h1>
+    <a href="//webrtc.github.io/samples/" title="WebRTC samples homepage">WebRTC samples</a>
+    <span>H.264 simulcast layer switching reproduction</span>
+  </h1>
+
+  <p>
+    This test starts one H.264 layer and then enables a second layer with
+    <code>RTCRtpSender.setParameters()</code>. Use the table below to check whether both
+    layers are sending video.
+  </p>
+
+  <div class="videos">
+    <div>
+      <h2>Local camera</h2>
+      <video id="localVideo" playsinline autoplay muted></video>
+    </div>
+    <div>
+      <h2>Loopback receiver</h2>
+      <video id="remoteVideo" playsinline autoplay></video>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="startButton">1. Start 640×480 camera</button>
+    <button id="callButton" disabled>2. Create H.264 call</button>
+    <button id="highMiddleButton" disabled>540 only: index 1</button>
+    <button id="dual540Button" disabled>360 + 540: indexes 1+2</button>
+    <button id="highTopButton" disabled>720 only: index 2</button>
+    <button id="dual720Button" disabled>360 + 720: indexes 1+2</button>
+    <button id="hangupButton" disabled>Hang up</button>
+  </div>
+
+  <p id="status">Start the camera to begin.</p>
+  <pre id="settings"></pre>
+
+  <h2>Outbound encoding stats</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>RID / index</th>
+        <th>Requested</th>
+        <th>Output</th>
+        <th>Target bitrate</th>
+        <th>Frames encoded</th>
+        <th>Packets sent</th>
+        <th>Total encode time</th>
+        <th>Counter state</th>
+      </tr>
+    </thead>
+    <tbody id="statsBody"></tbody>
+  </table>
+
+  <h2>Result</h2>
+  <pre id="result">Run one of the two-layer tests.</pre>
+
+  <p>
+    The issue is reproduced if index 1 keeps sending while index 2 is active but sends no
+    frames or packets.
+  </p>
+
+  <a href="https://github.com/webrtc/samples/tree/gh-pages/src/content/peerconnection/h264-simulcast-repro"
+     title="View source for this page on GitHub" id="viewSource">View source on GitHub</a>
+</div>
+
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script src="js/main.js" async></script>
+<script src="../../../js/lib/ga.js"></script>
+</body>
+</html>

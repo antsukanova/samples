@@ -1,0 +1,61 @@
+.videos {
+  display: flex;
+  gap: 20px;
+}
+
+.videos > div {
+  flex: 1;
+}
+
+video {
+  background: #222;
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+button {
+  margin: 0;
+}
+
+#status {
+  font-weight: 500;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 14px;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: left;
+}
+
+td.advancing {
+  background: #dff0d8;
+}
+
+td.stalled {
+  background: #f2dede;
+  font-weight: 500;
+}
+
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+@media screen and (max-width: 700px) {
+  .videos {
+    display: block;
+  }
+}
